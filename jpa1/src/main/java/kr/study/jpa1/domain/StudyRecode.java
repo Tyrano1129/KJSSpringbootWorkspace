@@ -25,7 +25,7 @@ public class StudyRecode {
     @Lob
     private String contents;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name="memberId")
     private Member member; // fk => member_id
     public void setId(long id) {
