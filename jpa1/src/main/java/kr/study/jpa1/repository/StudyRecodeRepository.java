@@ -1,5 +1,6 @@
 package kr.study.jpa1.repository;
 
+import kr.study.jpa1.domain.Member;
 import kr.study.jpa1.domain.StudyRecode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,11 @@ public interface StudyRecodeRepository extends JpaRepository<StudyRecode,Long> {
     List<StudyRecode> selectAll();
     @Query(value="select r from StudyRecode r where r.id = :id")
     StudyRecode find(long id);
+
+    @Query(value="select r from StudyRecode r where r.member = :member")
+    List<StudyRecode> recodeDeleteAll(Member member);
+    //delete study_recode where member_id = memberId;
+    void deleteByMember(Member member);
 
 
 }

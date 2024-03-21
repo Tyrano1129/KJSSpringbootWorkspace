@@ -45,4 +45,7 @@ public class MemberService {
     public Member getMember(String loginId){
         return memberRepository.findByLoginId(loginId);
     }
+    public Member getDeleteMember(Long id){
+        return memberRepository.findById(id);
+    }
 }

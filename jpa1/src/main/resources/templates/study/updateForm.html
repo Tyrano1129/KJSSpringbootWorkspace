@@ -13,7 +13,7 @@
             <div>   <label> 회원 </label> <input type="text" name="memberId" class="form-control"  th:value ="${record.member.getLoginId()}" readonly></div>
             <label for="studyDay">Study Day:</label>
             <input type="date" id="studyDay" name="studyDay" class="form-control"  th:value="${record.getStudyDay()}" th:max="${curdate}" >
-            <input type="time" id="startTime" name="startTime" class="form-control" th:value ="${curtime}" required>
+            <input type="time" id="startTime" name="startTime" class="form-control" th:value ="${record.getStartTime()}" required>
 
             <div> 공부기록(분) : <input type="number" name="studyMins" class="form-control" th:value ="${record.getStudyMins()}" min="1"></div>
             <div>Contents : <input type="text" name="contents" class="form-control"  th:value ="${record.getContents()}" size="70"></div>

@@ -3,6 +3,7 @@ package kr.study.jpa1.controller;
 import kr.study.jpa1.domain.Member;
 import kr.study.jpa1.form.MemberForm;
 import kr.study.jpa1.service.MemberService;
+import kr.study.jpa1.service.StudyRecodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService service;
+    private final StudyRecodeService recodeService;
 
     @GetMapping
     public String joinForm(){
@@ -54,13 +56,15 @@ public class MemberController {
 
     @GetMapping("/delete/{keyId}")
     public String memberDelete(@PathVariable Long keyId){
-       int cnt = service.memberDelete(keyId);
+        recodeService.memberAllDelete(service.getDeleteMember(keyId));
+        int cnt = service.memberDelete(keyId);
         System.out.println("keyId = " + cnt);
         return "redirect:/member/members";
     }
     @DeleteMapping("/{id}")
     public @ResponseBody String memberDelete2(@PathVariable Long id){
         System.out.println("id = " + id);
+        recodeService.memberAllDelete(service.getDeleteMember(id));
         service.memberDelete(id);
         return 0+"";
     }

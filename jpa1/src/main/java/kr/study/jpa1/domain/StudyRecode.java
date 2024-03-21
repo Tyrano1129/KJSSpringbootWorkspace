@@ -60,7 +60,7 @@ public class StudyRecode {
         String data = endStudyTime.format(DateTimeFormatter.ofPattern(patter));
         return data;
     }
-    public void update(StudyRecode stu) {
+    public void update(StudyForm stu) {
         this.studyDay = stu.getStudyDay();
         this.startTime = stu.getStartTime();
         this.studyMins = stu.getStudyMins();

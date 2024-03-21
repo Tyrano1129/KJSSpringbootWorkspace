@@ -40,7 +40,7 @@ public class StudyController {
             m.setId(member.getLoginId());
             m.setName(member.getName());
             list.add(m);
-            log.info("m = {}",m);
+            log.trace("m = {}",m);
         }
         model.addAttribute("members",list);
         model.addAttribute("curdate", LocalDate.now());
@@ -50,13 +50,13 @@ public class StudyController {
     }
     @PostMapping
     public String addStudyRecode(@ModelAttribute StudyForm stu){
-        log.info("study ={}",stu);
+        log.trace("study ={}",stu);
         Member m = memberService.getMember(stu.getMemberId());
         if(m == null){
             log.error("{} 아이디가 존재하지않음",m);
             return "redirect:/";
         }
-        log.info("member ={}",m);
+        log.trace("member ={}",m);
         service.join(stu,m);
         return "redirect:/study";
     }
@@ -64,7 +64,7 @@ public class StudyController {
     @GetMapping("/records")
     public String getAllList(Model model){
         List<StudyRecode> list = service.getAllRecode();
-        log.info("list = {}",list);
+        log.trace("list = {}",list);
         model.addAttribute("list",list);
         return  "study/list";
     }
@@ -72,15 +72,16 @@ public class StudyController {
     @GetMapping("/{keyId}")
     public String updateForm(@PathVariable Long keyId,Model model){
         StudyRecode recode = service.getOneRecode(keyId);
-        log.info("recode = {}",recode);
+        log.trace("recode = {}",recode);
         model.addAttribute("record",recode);
+        model.addAttribute("curdate",LocalDate.now());
         return "study/updateForm";
     }
 
     @PostMapping("/update")
-    public String update(@ModelAttribute StudyRecode stu){
-        log.info("stu = {}",stu);
-        service.recodeUpdate(stu);
+    public String update(@ModelAttribute StudyForm stu,@RequestParam Long id){
+        log.trace("stu = {}",stu);
+        service.recodeUpdate(stu,id);
         return "redirect:/study/records";
     }
 
