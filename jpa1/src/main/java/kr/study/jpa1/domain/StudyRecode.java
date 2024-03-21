@@ -25,7 +25,7 @@ public class StudyRecode {
     @Lob
     private String contents;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name="memberId")
     private Member member; // fk => member_id
     public void setId(long id) {
@@ -60,7 +60,7 @@ public class StudyRecode {
         String data = endStudyTime.format(DateTimeFormatter.ofPattern(patter));
         return data;
     }
-    public void update(StudyRecode stu) {
+    public void update(StudyForm stu) {
         this.studyDay = stu.getStudyDay();
         this.startTime = stu.getStartTime();
         this.studyMins = stu.getStudyMins();

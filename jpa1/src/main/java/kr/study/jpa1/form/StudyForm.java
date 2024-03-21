@@ -12,7 +12,6 @@ import java.time.LocalTime;
 @Builder
 public class StudyForm {
     private String memberId;
-    private Long id;
     private LocalDate studyDay;
     private LocalTime startTime;
     private int studyMins;
