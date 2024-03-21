@@ -2,19 +2,21 @@ package kr.boot.basic.service;
 
 import jakarta.transaction.Transactional;
 import kr.boot.basic.domain.Member;
-import kr.boot.basic.repository.MemberRepository;
+import kr.boot.basic.repository.SpringJpaMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 @Transactional
 public class MemberService {
 //    @Autowired
 //    MemberRepository memberRepository; // 필드 속성값 -> interface 필드주입
     // 생성자로 주입 하는걸 권장한다.
-    private final MemberRepository memberRepository;
-    public MemberService(MemberRepository repository){
-        this.memberRepository = repository;
-    }
+    @Autowired
+    private SpringJpaMemberRepository memberRepository;
 
 //    회원가입
     public boolean join(Member member){
